@@ -9,10 +9,21 @@ import Profile from './pages/Profile';
 import ProfileEdit from './pages/ProfileEdit';
 import NotFound from './pages/NotFound';
 import Carregando from './pages/Carregando';
+import Header from './components/Header';
 
 class Routes extends React.Component {
+  componentDidMount() {
+    const { getDados } = this.props;
+    getDados();
+  }
+
   render() {
-    const { name, isDisabled, onInputChange, entrar, logado, clicou } = this.props;
+    const { name, isDisabled, onInputChange, entrar, logado, clicou, user,
+      loadingUser, getDados } = this.props;
+    let compHeader = <Header user={ user } />;
+    if (loadingUser === true) {
+      compHeader = <Carregando />;
+    }
     let componente = (
       <Login
         name={ name }
@@ -30,21 +41,24 @@ class Routes extends React.Component {
           {logado ? <Redirect to="/search" /> : componente }
         </Route>
         <Route path="/search">
-          <Search />
+          <Search
+            getDados={ getDados }
+            compHeader={ compHeader }
+          />
         </Route>
         <Route
           path="/album/:id"
-          render={ (props) => <Album { ...props } /> }
+          render={ (props) => <Album { ...props } compHeader={ compHeader } /> }
         />
         <Route path="/favorites">
-          <Favorites />
+          <Favorites compHeader={ compHeader } />
         </Route>
         <Route
           path="/profile/edit"
-          render={ (props) => <ProfileEdit { ...props } /> }
+          render={ (props) => <ProfileEdit { ...props } compHeader={ compHeader } /> }
         />
         <Route path="/profile">
-          <Profile />
+          <Profile compHeader={ compHeader } />
         </Route>
         <Route path="*" component={ NotFound } />
       </Switch>
@@ -57,8 +71,11 @@ Routes.propTypes = {
   isDisabled: PropTypes.bool.isRequired,
   logado: PropTypes.bool.isRequired,
   clicou: PropTypes.bool.isRequired,
+  loadingUser: PropTypes.bool.isRequired,
   onInputChange: PropTypes.func.isRequired,
   entrar: PropTypes.func.isRequired,
+  getDados: PropTypes.func.isRequired,
+  user: PropTypes.objectOf(PropTypes.string).isRequired,
 };
 
 export default Routes;

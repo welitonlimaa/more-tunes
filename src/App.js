@@ -1,6 +1,6 @@
 import React from 'react';
 import Routes from './Routes';
-import { createUser } from './services/userAPI';
+import { createUser, getUser } from './services/userAPI';
 
 class App extends React.Component {
   constructor() {
@@ -9,8 +9,10 @@ class App extends React.Component {
       name: '',
       isDisabled: true,
       isLoading: true,
+      loadingUser: true,
       logado: false,
       clicou: false,
+      user: {},
     };
   }
 
@@ -37,8 +39,21 @@ class App extends React.Component {
     }
   };
 
+  getDados = async () => {
+    this.setState(
+      { loadingUser: true },
+      async () => {
+        const resposta = await getUser();
+        this.setState({
+          user: resposta,
+          loadingUser: false,
+        });
+      },
+    );
+  };
+
   render() {
-    const { name, isLoading, clicou } = this.state;
+    const { name, isLoading, clicou, user, loadingUser } = this.state;
     let { isDisabled, logado } = this.state;
     const limit = 3;
     if (name.length >= limit) {
@@ -50,17 +65,17 @@ class App extends React.Component {
     }
 
     return (
-      <>
-        <p>TrybeTunes</p>
-        <Routes
-          name={ name }
-          isDisabled={ isDisabled }
-          onInputChange={ this.onInputChange }
-          entrar={ this.entrar }
-          logado={ logado }
-          clicou={ clicou }
-        />
-      </>
+      <Routes
+        name={ name }
+        isDisabled={ isDisabled }
+        onInputChange={ this.onInputChange }
+        entrar={ this.entrar }
+        logado={ logado }
+        clicou={ clicou }
+        user={ user }
+        loadingUser={ loadingUser }
+        getDados={ this.getDados }
+      />
     );
   }
 }
