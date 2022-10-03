@@ -8,7 +8,6 @@ class Search extends React.Component {
     return (
       <div data-testid="page-search">
         { compHeader }
-        header
       </div>
     );
   }
