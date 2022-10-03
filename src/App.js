@@ -13,6 +13,7 @@ class App extends React.Component {
       logado: false,
       clicou: false,
       user: {},
+      artist: '',
     };
   }
 
@@ -53,9 +54,10 @@ class App extends React.Component {
   };
 
   render() {
-    const { name, isLoading, clicou, user, loadingUser } = this.state;
+    const { name, isLoading, clicou, user, loadingUser, artist } = this.state;
     let { isDisabled, logado } = this.state;
     const limit = 3;
+
     if (name.length >= limit) {
       isDisabled = false;
     }
@@ -75,6 +77,7 @@ class App extends React.Component {
         user={ user }
         loadingUser={ loadingUser }
         getDados={ this.getDados }
+        artist={ artist }
       />
     );
   }

@@ -19,7 +19,7 @@ class Routes extends React.Component {
 
   render() {
     const { name, isDisabled, onInputChange, entrar, logado, clicou, user,
-      loadingUser, getDados } = this.props;
+      loadingUser, getDados, artist } = this.props;
     let compHeader = <Header user={ user } />;
     if (loadingUser === true) {
       compHeader = <Carregando />;
@@ -44,6 +44,9 @@ class Routes extends React.Component {
           <Search
             getDados={ getDados }
             compHeader={ compHeader }
+            artist={ artist }
+            onInputChange={ onInputChange }
+            isDisabled={ isDisabled }
           />
         </Route>
         <Route
@@ -68,6 +71,7 @@ class Routes extends React.Component {
 
 Routes.propTypes = {
   name: PropTypes.string.isRequired,
+  artist: PropTypes.string.isRequired,
   isDisabled: PropTypes.bool.isRequired,
   logado: PropTypes.bool.isRequired,
   clicou: PropTypes.bool.isRequired,
