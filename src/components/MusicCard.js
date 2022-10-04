@@ -41,6 +41,7 @@ MusicCard.propTypes = {
   previewUrl: PropTypes.string.isRequired,
   insertFav: PropTypes.func.isRequired,
   add: PropTypes.bool.isRequired,
+  listaFav: PropTypes.arrayOf(PropTypes.number).isRequired,
 //   artworkUrl60: PropTypes.string.isRequired,
 };
 
