@@ -19,7 +19,8 @@ class Routes extends React.Component {
 
   render() {
     const { name, isDisabled, onInputChange, entrar, logado, clicou, user,
-      loadingUser, getDados, artist } = this.props;
+      loadingUser, getDados, artist, searchArtist, arrayArtist, nameArtista,
+      loadingArtist, clicouSearch } = this.props;
     let compHeader = <Header user={ user } />;
     if (loadingUser === true) {
       compHeader = <Carregando />;
@@ -45,8 +46,13 @@ class Routes extends React.Component {
             getDados={ getDados }
             compHeader={ compHeader }
             artist={ artist }
+            nameArtista={ nameArtista }
             onInputChange={ onInputChange }
+            loadingArtist={ loadingArtist }
             isDisabled={ isDisabled }
+            searchArtist={ searchArtist }
+            arrayArtist={ arrayArtist }
+            clicouSearch={ clicouSearch }
           />
         </Route>
         <Route
@@ -72,14 +78,19 @@ class Routes extends React.Component {
 Routes.propTypes = {
   name: PropTypes.string.isRequired,
   artist: PropTypes.string.isRequired,
+  nameArtista: PropTypes.string.isRequired,
   isDisabled: PropTypes.bool.isRequired,
   logado: PropTypes.bool.isRequired,
   clicou: PropTypes.bool.isRequired,
   loadingUser: PropTypes.bool.isRequired,
+  loadingArtist: PropTypes.bool.isRequired,
+  clicouSearch: PropTypes.bool.isRequired,
   onInputChange: PropTypes.func.isRequired,
   entrar: PropTypes.func.isRequired,
   getDados: PropTypes.func.isRequired,
+  searchArtist: PropTypes.func.isRequired,
   user: PropTypes.objectOf(PropTypes.string).isRequired,
+  arrayArtist: PropTypes.arrayOf(PropTypes.objectOf).isRequired,
 };
 
 export default Routes;

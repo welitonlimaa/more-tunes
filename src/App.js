@@ -1,6 +1,7 @@
 import React from 'react';
 import Routes from './Routes';
 import { createUser, getUser } from './services/userAPI';
+import searchAlbumsAPI from './services/searchAlbumsAPI';
 
 class App extends React.Component {
   constructor() {
@@ -10,10 +11,14 @@ class App extends React.Component {
       isDisabled: true,
       isLoading: true,
       loadingUser: true,
+      loadingArtist: false,
       logado: false,
       clicou: false,
+      clicouSearch: false,
       user: {},
       artist: '',
+      nameArtista: '',
+      arrayArtist: [],
     };
   }
 
@@ -53,8 +58,26 @@ class App extends React.Component {
     );
   };
 
+  searchArtist = async () => {
+    const { artist } = this.state;
+    this.setState(
+      { loadingArtist: true },
+      async () => {
+        const resposta = await searchAlbumsAPI(artist);
+        this.setState({
+          clicouSearch: true,
+          nameArtista: artist,
+          artist: '',
+          loadingArtist: false,
+          arrayArtist: resposta,
+        });
+      },
+    );
+  };
+
   render() {
-    const { name, isLoading, clicou, user, loadingUser, artist } = this.state;
+    const { name, isLoading, clicou, user, loadingUser, artist,
+      arrayArtist, loadingArtist, clicouSearch, nameArtista } = this.state;
     let { isDisabled, logado } = this.state;
     const limit = 3;
 
@@ -75,9 +98,15 @@ class App extends React.Component {
         logado={ logado }
         clicou={ clicou }
         user={ user }
+        isLoading={ isLoading }
         loadingUser={ loadingUser }
         getDados={ this.getDados }
         artist={ artist }
+        arrayArtist={ arrayArtist }
+        searchArtist={ this.searchArtist }
+        loadingArtist={ loadingArtist }
+        clicouSearch={ clicouSearch }
+        nameArtista={ nameArtista }
       />
     );
   }
