@@ -41,12 +41,12 @@ class Search extends React.Component {
     let albums = '';
     if (arrayArtist.length > 0 && clicouSearch === true) {
       tituloArtista = `Resultado de álbuns de: ${nameArtista}`;
-      albums = arrayArtist.map((dado) => {
+      albums = arrayArtist.map((dado, id) => {
         const { artistName, collectionId, collectionName, artworkUrl100 } = dado;
         //  collectionPrice, releaseDate, trackCount, artistId,
         const albumLink = `/album/${collectionId}`;
         return (
-          <div key={ collectionId }>
+          <div key={ id }>
             <img src={ artworkUrl100 } alt={ collectionName } />
             <h3>
               <Link to={ albumLink } data-testid={ `link-to-album-${collectionId}` }>
