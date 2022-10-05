@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import getMusics from '../services/musicsAPI';
 import Carregando from './Carregando';
 import MusicCard from '../components/MusicCard';
-import { addSong, getFavoriteSongs } from '../services/favoriteSongsAPI';
+import { addSong, getFavoriteSongs, removeSong } from '../services/favoriteSongsAPI';
 
 class Album extends React.Component {
   constructor() {
@@ -18,7 +18,6 @@ class Album extends React.Component {
 
   componentDidMount() {
     this.getAlbum();
-    this.getFavs();
   }
 
   getAlbum = async () => {
@@ -27,16 +26,33 @@ class Album extends React.Component {
     const idAlbum = id[1];
     const album = await getMusics(idAlbum);
     this.setState({ album });
+    this.getFavs();
   };
 
-  atualizaFav = (id, add) => {
+  removeFav = async (id) => {
+    const { album } = this.state;
+    const objFav = album.find((dado) => dado.trackId === id);
+    this.setState(
+      { loadingFav: true },
+      async () => {
+        await removeSong(objFav);
+        this.setState({
+          loadingFav: false,
+        });
+      },
+    );
+  };
+
+  atualizaFav = async (id, add) => {
     const { listaFav } = this.state;
     if (add === true) {
+      await this.removeFav(id);
       const lista = listaFav.filter((dado) => dado !== id);
       this.setState({
         listaFav: lista,
       });
     } else {
+      await this.removeFav(id);
       this.setState((prevVal) => ({
         listaFav: [...prevVal.listaFav, id],
       }));
@@ -46,16 +62,18 @@ class Album extends React.Component {
   insertFav = async (id, add) => {
     const { album } = this.state;
     const objFav = album.find((dado) => dado.trackId === id);
-    this.atualizaFav(id, add);
-    this.setState(
-      { loadingFav: true },
-      async () => {
-        await addSong(objFav);
-        this.setState({
-          loadingFav: false,
-        });
-      },
-    );
+    await this.atualizaFav(id, add);
+    if (add === false) {
+      this.setState(
+        { loadingFav: true },
+        async () => {
+          await addSong(objFav);
+          this.setState({
+            loadingFav: false,
+          });
+        },
+      );
+    }
   };
 
   getFavs = async () => {
