@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import getMusics from '../services/musicsAPI';
 import Carregando from './Carregando';
 import MusicCard from '../components/MusicCard';
-import { addSong } from '../services/favoriteSongsAPI';
+import { addSong, getFavoriteSongs } from '../services/favoriteSongsAPI';
 
 class Album extends React.Component {
   constructor() {
@@ -18,6 +18,7 @@ class Album extends React.Component {
 
   componentDidMount() {
     this.getAlbum();
+    this.getFavs();
   }
 
   getAlbum = async () => {
@@ -28,12 +29,24 @@ class Album extends React.Component {
     this.setState({ album });
   };
 
-  insertFav = async (id) => {
+  atualizaFav = (id, add) => {
+    const { listaFav } = this.state;
+    if (add === true) {
+      const lista = listaFav.filter((dado) => dado !== id);
+      this.setState({
+        listaFav: lista,
+      });
+    } else {
+      this.setState((prevVal) => ({
+        listaFav: [...prevVal.listaFav, id],
+      }));
+    }
+  };
+
+  insertFav = async (id, add) => {
     const { album } = this.state;
     const objFav = album.find((dado) => dado.trackId === id);
-    this.setState((prevVal) => ({
-      listaFav: [...prevVal.listaFav, id],
-    }));
+    this.atualizaFav(id, add);
     this.setState(
       { loadingFav: true },
       async () => {
@@ -45,13 +58,26 @@ class Album extends React.Component {
     );
   };
 
+  getFavs = async () => {
+    this.setState(
+      { loadingFav: true },
+      async () => {
+        const lista = await getFavoriteSongs();
+        const listaIdfav = lista.map((dado) => dado.trackId);
+        this.setState({
+          loadingFav: false,
+          listaFav: listaIdfav,
+        });
+      },
+    );
+  };
+
   render() {
     const { album, loadingFav, add, listaFav } = this.state;
     if (album.length === 0 || loadingFav === true) {
       return <Carregando />;
     }
 
-    console.log(album);
     const { artistName, collectionName, artworkUrl100 } = album[0];
     const { compHeader } = this.props;
 
