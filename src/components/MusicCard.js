@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 class MusicCard extends React.Component {
   render() {
-    const { trackId, trackName, previewUrl, insertFav, listaFav } = this.props;
+    const { trackId, trackName, previewUrl, callInsertFav, listaFav } = this.props;
     let { add } = this.props;
     // artworkUrl60
     const statusChecked = listaFav.some((dado) => dado === trackId);
@@ -26,7 +26,7 @@ class MusicCard extends React.Component {
             id="fav"
             type="checkbox"
             checked={ add }
-            onChange={ () => insertFav(trackId, add) }
+            onChange={ () => callInsertFav(trackId, add) }
           />
           Favorita
         </label>
@@ -39,7 +39,7 @@ MusicCard.propTypes = {
   trackId: PropTypes.number.isRequired,
   trackName: PropTypes.string.isRequired,
   previewUrl: PropTypes.string.isRequired,
-  insertFav: PropTypes.func.isRequired,
+  callInsertFav: PropTypes.func.isRequired,
   add: PropTypes.bool.isRequired,
   listaFav: PropTypes.arrayOf(PropTypes.number).isRequired,
 //   artworkUrl60: PropTypes.string.isRequired,

@@ -3,16 +3,14 @@ import PropTypes from 'prop-types';
 import getMusics from '../services/musicsAPI';
 import Carregando from './Carregando';
 import MusicCard from '../components/MusicCard';
-import { addSong, getFavoriteSongs, removeSong } from '../services/favoriteSongsAPI';
+import { addSong } from '../services/favoriteSongsAPI';
 
 class Album extends React.Component {
   constructor() {
     super();
     this.state = {
       album: [],
-      loadingFav: false,
-      add: false,
-      listaFav: [],
+      isloadingFav: false,
     };
   }
 
@@ -22,77 +20,36 @@ class Album extends React.Component {
 
   getAlbum = async () => {
     const { location: { pathname } } = this.props;
+    const { getFavs } = this.props;
     const id = pathname.split('/album/');
     const idAlbum = id[1];
     const album = await getMusics(idAlbum);
     this.setState({ album });
-    this.getFavs();
-  };
-
-  removeFav = async (id) => {
-    const { album } = this.state;
-    const objFav = album.find((dado) => dado.trackId === id);
-    this.setState(
-      { loadingFav: true },
-      async () => {
-        await removeSong(objFav);
-        this.setState({
-          loadingFav: false,
-        });
-      },
-    );
-  };
-
-  atualizaFav = async (id, add) => {
-    const { listaFav } = this.state;
-    if (add === true) {
-      await this.removeFav(id);
-      const lista = listaFav.filter((dado) => dado !== id);
-      this.setState({
-        listaFav: lista,
-      });
-    } else {
-      await this.removeFav(id);
-      this.setState((prevVal) => ({
-        listaFav: [...prevVal.listaFav, id],
-      }));
-    }
+    getFavs();
   };
 
   insertFav = async (id, add) => {
     const { album } = this.state;
+    const { atualizaFav } = this.props;
     const objFav = album.find((dado) => dado.trackId === id);
-    await this.atualizaFav(id, add);
+    atualizaFav(id, add, album);
     if (add === false) {
       this.setState(
-        { loadingFav: true },
+        { isloadingFav: true },
         async () => {
           await addSong(objFav);
           this.setState({
-            loadingFav: false,
+            isloadingFav: false,
           });
         },
       );
     }
   };
 
-  getFavs = async () => {
-    this.setState(
-      { loadingFav: true },
-      async () => {
-        const lista = await getFavoriteSongs();
-        const listaIdfav = lista.map((dado) => dado.trackId);
-        this.setState({
-          loadingFav: false,
-          listaFav: listaIdfav,
-        });
-      },
-    );
-  };
-
   render() {
-    const { album, loadingFav, add, listaFav } = this.state;
-    if (album.length === 0 || loadingFav === true) {
+    const { album, isloadingFav } = this.state;
+    const { add, listaFav, loadingRemove } = this.props;
+    if (album.length === 0 || isloadingFav === true || loadingRemove === true) {
       return <Carregando />;
     }
 
@@ -119,7 +76,7 @@ class Album extends React.Component {
                   trackName={ trackName }
                   previewUrl={ previewUrl }
                   artworkUrl60={ artworkUrl60 }
-                  insertFav={ this.insertFav }
+                  callInsertFav={ this.insertFav }
                   add={ add }
                   listaFav={ listaFav }
                 />
@@ -136,7 +93,12 @@ Album.propTypes = {
   location: PropTypes.shape({
     pathname: PropTypes.string,
   }).isRequired,
+  loadingRemove: PropTypes.bool.isRequired,
+  add: PropTypes.bool.isRequired,
+  listaFav: PropTypes.arrayOf(PropTypes.number).isRequired,
   compHeader: PropTypes.element.isRequired,
+  getFavs: PropTypes.func.isRequired,
+  atualizaFav: PropTypes.func.isRequired,
 };
 
 export default Album;

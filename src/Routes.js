@@ -10,21 +10,81 @@ import ProfileEdit from './pages/ProfileEdit';
 import NotFound from './pages/NotFound';
 import Carregando from './pages/Carregando';
 import Header from './components/Header';
+import { getFavoriteSongs, removeSong } from './services/favoriteSongsAPI';
 
 class Routes extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      loadingFav: false,
+      loadingRemove: false,
+      add: false,
+      listaFav: [],
+    };
+  }
+
   componentDidMount() {
     const { getDados } = this.props;
     getDados();
   }
 
+  removeFav = async (id, album) => {
+    if (album !== undefined) {
+      const objFav = album.find((dado) => dado.trackId === id);
+      this.setState(
+        { loadingRemove: true },
+        async () => {
+          await removeSong(objFav);
+          this.setState({
+            loadingRemove: false,
+          });
+        },
+      );
+    }
+  };
+
+  atualizaFav = async (id, add, album) => {
+    const { listaFav } = this.state;
+    if (add === true) {
+      await this.removeFav(id, album);
+      const lista = listaFav.filter((dado) => dado !== id);
+      this.setState({
+        listaFav: lista,
+      });
+    } else {
+      await this.removeFav(id);
+      this.setState((prevVal) => ({
+        listaFav: [...prevVal.listaFav, id],
+      }));
+    }
+  };
+
+  getFavs = async () => {
+    this.setState(
+      { loadingFav: true },
+      async () => {
+        const lista = await getFavoriteSongs();
+        const listaIdfav = lista.map((dado) => dado.trackId);
+        this.setState({
+          loadingFav: false,
+          listaFav: listaIdfav,
+        });
+      },
+    );
+  };
+
   render() {
     const { name, isDisabled, onInputChange, entrar, logado, clicou, user,
       loadingUser, getDados, artist, searchArtist, arrayArtist, nameArtista,
       loadingArtist, clicouSearch } = this.props;
+
+    const { loadingFav, add, listaFav, loadingRemove } = this.state;
+
     let compHeader = <Header user={ user } />;
     if (loadingUser === true) {
       compHeader = <Carregando />;
     }
+
     let componente = (
       <Login
         name={ name }
@@ -57,10 +117,29 @@ class Routes extends React.Component {
         </Route>
         <Route
           path="/album/:id"
-          render={ (props) => <Album { ...props } compHeader={ compHeader } /> }
+          render={ (props) => (
+            <Album
+              { ...props }
+              compHeader={ compHeader }
+              loadingFav={ loadingFav }
+              loadingRemove={ loadingRemove }
+              add={ add }
+              listaFav={ listaFav }
+              atualizaFav={ this.atualizaFav }
+              getFavs={ this.getFavs }
+            />
+          ) }
         />
         <Route path="/favorites">
-          <Favorites compHeader={ compHeader } />
+          <Favorites
+            compHeader={ compHeader }
+            getFavs={ this.getFavs }
+            loadingFav={ loadingFav }
+            loadingRemove={ loadingRemove }
+            add={ add }
+            listaFav={ listaFav }
+            atualizaFav={ this.atualizaFav }
+          />
         </Route>
         <Route
           path="/profile/edit"
