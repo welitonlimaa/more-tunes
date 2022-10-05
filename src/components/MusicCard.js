@@ -12,7 +12,7 @@ class MusicCard extends React.Component {
     } else {
       add = false;
     }
-    console.log(add);
+
     return (
       <div>
         {/* <img src={ artworkUrl60 } alt={ trackName } /> */}
