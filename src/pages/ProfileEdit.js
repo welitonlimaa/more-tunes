@@ -69,6 +69,7 @@ class ProfileEdit extends React.Component {
   };
 
   valideEmail = ({ target }) => {
+    // referencia https://www.horadecodar.com.br/2020/09/13/como-validar-email-com-javascript/
     const { value } = target;
     const re = /\S+@\S+\.\S+/;
     if (re.test(value) === true) {
