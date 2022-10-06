@@ -46,8 +46,11 @@ class Profile extends React.Component {
     return (
       <div data-testid="page-profile">
         { compHeader }
+        <br />
         <div>
           <Link to="/profile/edit">Editar perfil</Link>
+          <br />
+          <br />
           <img src={ image } alt="perfil" data-testid="profile-image" />
           <h3>{name}</h3>
           <p>{email}</p>
