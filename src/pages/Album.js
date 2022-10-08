@@ -59,16 +59,18 @@ class Album extends React.Component {
     return (
       <div data-testid="page-album">
         { compHeader }
-        <div>
-          <img src={ artworkUrl100 } alt={ collectionName } />
-          <h3 data-testid="album-name">{collectionName}</h3>
-          <h4 data-testid="artist-name">{artistName}</h4>
-        </div>
-        <div>
-          {
-            album.map((dado, index) => {
-              const { trackId, trackName, previewUrl, artworkUrl60 } = dado;
-              return index > 0
+        <div className="container">
+          <div className="container-content">
+            <div>
+              <img src={ artworkUrl100 } alt={ collectionName } />
+              <h3 data-testid="album-name">{collectionName}</h3>
+              <h4 data-testid="artist-name">{artistName}</h4>
+            </div>
+            <div>
+              {
+                album.map((dado, index) => {
+                  const { trackId, trackName, previewUrl, artworkUrl60 } = dado;
+                  return index > 0
               && (
                 <MusicCard
                   key={ index }
@@ -81,8 +83,10 @@ class Album extends React.Component {
                   listaFav={ listaFav }
                 />
               );
-            })
-          }
+                })
+              }
+            </div>
+          </div>
         </div>
       </div>
     );

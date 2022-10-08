@@ -1,27 +1,38 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import logo from '../imgStyle/logo.png';
+import back from '../imgStyle/back.png';
 
 class Login extends React.Component {
   render() {
     const { name, isDisabled, onInputChange, entrar } = this.props;
     return (
-      <div data-testid="page-login">
+      <div data-testid="page-login" className="login">
+        <img src={ back } alt="back" id="imgBack" />
         <form>
-          <input
-            data-testid="login-name-input"
-            name="name"
-            placeholder="Digite o nome..."
-            value={ name }
-            onChange={ onInputChange }
-          />
-          <button
-            type="button"
-            data-testid="login-submit-button"
-            disabled={ isDisabled }
-            onClick={ entrar }
-          >
-            Entrar
-          </button>
+          <div id="logo-Form">
+            <div id="logo">
+              <img src={ logo } alt="logo" />
+            </div>
+            <div id="loginForm">
+              <input
+                data-testid="login-name-input"
+                name="name"
+                placeholder="qual o seu nome?"
+                value={ name }
+                onChange={ onInputChange }
+              />
+              <br />
+              <button
+                type="button"
+                data-testid="login-submit-button"
+                disabled={ isDisabled }
+                onClick={ entrar }
+              >
+                Entrar
+              </button>
+            </div>
+          </div>
         </form>
       </div>
     );

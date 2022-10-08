@@ -48,7 +48,7 @@ class Favorites extends React.Component {
     return (
       <div data-testid="page-favorites">
         { compHeader }
-        <div>
+        <div className="container">
           {
             musicas.map((dado, index) => {
               const { trackId, trackName, previewUrl, artworkUrl60 } = dado;

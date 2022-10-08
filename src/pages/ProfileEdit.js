@@ -119,9 +119,8 @@ class ProfileEdit extends React.Component {
     return (
       <div data-testid="page-profile-edit">
         { compHeader }
-        <br />
-        <div>
-          <form>
+        <div className="container">
+          <form className="container-content">
             <input
               data-testid="edit-input-image"
               id="image"
