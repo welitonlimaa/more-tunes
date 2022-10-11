@@ -37,28 +37,31 @@ class Search extends React.Component {
       </form>
     );
 
+    let tituloNotfound = '';
     let tituloArtista = '';
     let albums = '';
     if (arrayArtist.length > 0 && clicouSearch === true) {
-      tituloArtista = <p id="pt">{`Resultado de álbuns de: ${nameArtista}`}</p>;
+      tituloArtista = <h3 id="titulo-artista">{`Resultado de álbuns de: ${nameArtista}`}</h3>;
       albums = arrayArtist.map((dado, id) => {
         const { artistName, collectionId, collectionName, artworkUrl100 } = dado;
         //  collectionPrice, releaseDate, trackCount, artistId,
         const albumLink = `/album/${collectionId}`;
         return (
-          <div key={ id }>
+          <div key={ id } className="album-card">
             <img src={ artworkUrl100 } alt={ collectionName } />
-            <h3>
-              <Link to={ albumLink } data-testid={ `link-to-album-${collectionId}` }>
-                {collectionName}
-              </Link>
-            </h3>
-            <p>{ artistName }</p>
+            <div>
+              <h3>
+                <Link to={ albumLink } data-testid={ `link-to-album-${collectionId}` }>
+                  {collectionName}
+                </Link>
+              </h3>
+              <h4>{ artistName }</h4>
+            </div>
           </div>
         );
       });
     } else if (arrayArtist.length === 0 && clicouSearch === true) {
-      tituloArtista = <p>Nenhum álbum foi encontrado</p>;
+      tituloNotfound = <p>Nenhum álbum foi encontrado</p>;
     }
 
     return (
@@ -71,11 +74,10 @@ class Search extends React.Component {
               { componente }
             </div>
           </div>
-          <div id="main-albums">
-            { loadingArtist === true ? <Carregando /> : tituloArtista }
-            { loadingArtist === true ? <Carregando />
-              : <div className="container-albums">{ albums }</div> }
-          </div>
+          { arrayArtist.length === 0 ? tituloNotfound : tituloArtista }
+          { loadingArtist === true ? <Carregando />
+            : <div className="container-albums">{ albums }</div> }
+
         </div>
       </div>
     );

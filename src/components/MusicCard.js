@@ -14,22 +14,22 @@ class MusicCard extends React.Component {
     }
 
     return (
-      <div>
+      <div className="music-cards">
         {/* <img src={ artworkUrl60 } alt={ trackName } /> */}
         <h4>{trackName}</h4>
         <audio data-testid="audio-component" src={ previewUrl } controls>
           <track kind="captions" />
         </audio>
-        <label htmlFor="fav">
+        <div>
           <input
             data-testid={ `checkbox-music-${trackId}` }
-            id="fav"
+            id={ trackId }
             type="checkbox"
             checked={ add }
             onChange={ () => callInsertFav(trackId, add) }
           />
-          Favorita
-        </label>
+          <label htmlFor={ trackId } />
+        </div>
       </div>
     );
   }

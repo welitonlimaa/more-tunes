@@ -4,6 +4,7 @@ import getMusics from '../services/musicsAPI';
 import Carregando from './Carregando';
 import MusicCard from '../components/MusicCard';
 import { addSong } from '../services/favoriteSongsAPI';
+import backHeader from '../imgStyle/back-header.png';
 
 class Album extends React.Component {
   constructor() {
@@ -49,28 +50,26 @@ class Album extends React.Component {
   render() {
     const { album, isloadingFav } = this.state;
     const { add, listaFav, loadingRemove } = this.props;
-    if (album.length === 0 || isloadingFav === true || loadingRemove === true) {
-      return <Carregando />;
-    }
-
-    const { artistName, collectionName, artworkUrl100 } = album[0];
     const { compHeader } = this.props;
-
-    return (
-      <div data-testid="page-album">
-        { compHeader }
-        <div className="container">
-          <div className="container-content">
-            <div>
-              <img src={ artworkUrl100 } alt={ collectionName } />
+    let componente = '';
+    if (album.length === 0 || isloadingFav === true || loadingRemove === true) {
+      componente = <Carregando />;
+    } else {
+      const { artistName, collectionName, artworkUrl100 } = album[0];
+      componente = (
+        <div id="album-id">
+          <div id="album-image">
+            <img src={ artworkUrl100 } alt={ collectionName } />
+          </div>
+          <div id="album-container">
+            <div id="album-title">
               <h3 data-testid="album-name">{collectionName}</h3>
-              <h4 data-testid="artist-name">{artistName}</h4>
+              <h5 data-testid="artist-name">{artistName}</h5>
             </div>
-            <div>
-              {
-                album.map((dado, index) => {
-                  const { trackId, trackName, previewUrl, artworkUrl60 } = dado;
-                  return index > 0
+            <div id="album-musics">
+              { album.map((dado, index) => {
+                const { trackId, trackName, previewUrl, artworkUrl60 } = dado;
+                return index > 0
               && (
                 <MusicCard
                   key={ index }
@@ -83,10 +82,23 @@ class Album extends React.Component {
                   listaFav={ listaFav }
                 />
               );
-                })
-              }
+              })}
             </div>
           </div>
+        </div>
+      );
+    }
+
+    return (
+      <div data-testid="page-album">
+        { compHeader }
+        <div className="container">
+          <div className="container-content">
+            <div id="header-content">
+              <img src={ backHeader } alt="back-header" />
+            </div>
+          </div>
+          { componente }
         </div>
       </div>
     );
