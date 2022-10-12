@@ -2,29 +2,45 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import logo from '../imgStyle/logo.png';
-import perfil from '../imgStyle/perfil.png';
-import favoritas from '../imgStyle/favoritas.png';
-import pesquisa from '../imgStyle/pesquisa.png';
+import favoritas from '../imgStyle/star.png';
+import pesquisa from '../imgStyle/lupa.png';
+import perfilphoto from '../imgStyle/perfilphoto.png';
 
 class Header extends React.Component {
   render() {
     const { user } = this.props;
+    const { name } = user;
+    let { image } = user;
+    if (image.length === 0) {
+      image = perfilphoto;
+    }
+
     return (
       <header data-testid="header-component">
         <div className="header-menu">
           <img src={ logo } alt="logo" id="logo-header" />
-          <div>
+          <div id="nav">
             <Link to="/search" data-testid="link-to-search">
-              <img src={ pesquisa } alt="pesquisa" />
+              <div>
+                <img src={ pesquisa } alt="pesquisa" />
+                <p>Pesquisa</p>
+              </div>
             </Link>
             <Link to="/favorites" data-testid="link-to-favorites">
-              <img src={ favoritas } alt="favoritas" />
+              <div>
+                <img src={ favoritas } alt="favoritas" />
+                <p>Favoritas</p>
+              </div>
             </Link>
             <Link to="/profile" data-testid="link-to-profile">
-              <img src={ perfil } alt="perfil" />
+              <div>
+                <img src={ perfilphoto } alt="perfil" />
+                <p>Perfil</p>
+              </div>
             </Link>
           </div>
           <div id="user-header">
+            <img src={ image } alt={ name } />
             <p data-testid="header-user-name">{user.name}</p>
           </div>
         </div>

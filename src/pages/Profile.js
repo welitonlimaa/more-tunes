@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { getUser } from '../services/userAPI';
 import Carregando from './Carregando';
+import backHeader from '../imgStyle/back-header.png';
+import perfilphoto from '../imgStyle/perfilphoto.png';
+import Header from '../components/Header';
 
 class Profile extends React.Component {
   constructor() {
@@ -39,26 +42,52 @@ class Profile extends React.Component {
 
   render() {
     const { compHeader } = this.props;
-    const { name, email, description, image, loadingUser } = this.state;
-    if (loadingUser === true) {
-      return <Carregando />;
+    const { name, email, description, loadingUser } = this.state;
+
+    // if (loadingUser === true) {
+    //   return <Carregando />;
+    // }
+    let { image } = this.state;
+    if (image.length === 0) {
+      image = perfilphoto;
     }
+    const user = { name, image };
+
     return (
       <div data-testid="page-profile">
-        { compHeader }
-        <div className="container">
-          <div className="container-content">
-            <div>
-              <Link to="/profile/edit">Editar perfil</Link>
-              <br />
-              <br />
-              <img src={ image } alt="perfil" data-testid="profile-image" />
-              <h3>{name}</h3>
-              <p>{email}</p>
-              <p>{description}</p>
+        <Header user={ user } />
+        { loadingUser === true ? <Carregando />
+          : (<div className="container">
+            <div className="container-content-perfil">
+              <div className="header-content-perfil">
+                <img src={ backHeader } alt="back-header" />
+              </div>
             </div>
-          </div>
-        </div>
+            <div id="perfil-container">
+              <div id="perfil-image">
+                <img
+                  src={ image }
+                  alt="perfil"
+                  data-testid="profile-image"
+                />
+              </div>
+              <div id="dados-container">
+                <div>
+                  <h3>Nome</h3>
+                  <p>{name}</p>
+                  <h3>E-mail</h3>
+                  <p>{email}</p>
+                  <h3>Descrição</h3>
+                  <p>{description}</p>
+                  <Link to="/profile/edit">
+                    <button type="button">
+                      Editar Perfil
+                    </button>
+                  </Link>
+                </div>
+              </div>
+            </div>
+             </div>)}
       </div>
     );
   }

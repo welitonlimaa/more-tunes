@@ -20,6 +20,8 @@ class Routes extends React.Component {
       loadingRemove: false,
       add: false,
       listaFav: [],
+      updateDados: false,
+      userDados: {},
     };
   }
 
@@ -73,14 +75,29 @@ class Routes extends React.Component {
     );
   };
 
+  updateUserData = ({ name, image }) => {
+    const user = { name, image };
+    this.setState({
+      updateDados: true,
+      userDados: user,
+    });
+  };
+
   render() {
     const { name, isDisabled, onInputChange, entrar, logado, clicou, user,
       loadingUser, getDados, artist, searchArtist, arrayArtist, nameArtista,
       loadingArtist, clicouSearch } = this.props;
 
-    const { loadingFav, add, listaFav, loadingRemove } = this.state;
+    const { loadingFav, add, listaFav, loadingRemove, updateDados,
+      userDados } = this.state;
+    let dados = {};
+    if (updateDados === false) {
+      dados = user;
+    } else {
+      dados = userDados;
+    }
 
-    let compHeader = <Header user={ user } />;
+    let compHeader = <Header user={ dados } />;
     if (loadingUser === true) {
       compHeader = <Carregando />;
     }
@@ -95,6 +112,7 @@ class Routes extends React.Component {
     if (clicou === true) {
       componente = <Carregando />;
     }
+    console.log(user);
 
     return (
       <Switch>
@@ -143,7 +161,12 @@ class Routes extends React.Component {
         </Route>
         <Route
           path="/profile/edit"
-          render={ (props) => <ProfileEdit { ...props } compHeader={ compHeader } /> }
+          render={ (props) => (
+            <ProfileEdit
+              { ...props }
+              compHeader={ compHeader }
+              updateUserData={ this.updateUserData }
+            />) }
         />
         <Route path="/profile">
           <Profile compHeader={ compHeader } />

@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 import Carregando from './Carregando';
 import { getUser, updateUser } from '../services/userAPI';
+import backHeader from '../imgStyle/back-header.png';
+import perfilphoto from '../imgStyle/perfilphoto.png';
 
 class ProfileEdit extends React.Component {
   constructor() {
@@ -47,6 +49,7 @@ class ProfileEdit extends React.Component {
   };
 
   updateData = async () => {
+    const { updateUserData } = this.props;
     const { name, email, description, image } = this.state;
     const objUser = { name, email, description, image };
     this.setState(
@@ -59,6 +62,7 @@ class ProfileEdit extends React.Component {
         });
       },
     );
+    updateUserData({ name, image });
   };
 
   handleChange = ({ target }) => {
@@ -87,7 +91,7 @@ class ProfileEdit extends React.Component {
 
   render() {
     const { compHeader } = this.props;
-    const { name, email, description, image, isLoadingUser, salvo } = this.state;
+    const { name, email, description, isLoadingUser, salvo, image } = this.state;
     let { statusEmail } = this.state;
 
     // const arrayUser = [name, email, description, image];
@@ -115,62 +119,79 @@ class ProfileEdit extends React.Component {
     if (re.test(email) === true) {
       statusEmail = true;
     }
+    let srcimg = '';
+    if (image.length === 0) {
+      srcimg = perfilphoto;
+    } else {
+      srcimg = image;
+    }
 
     return (
       <div data-testid="page-profile-edit">
         { compHeader }
         <div className="container">
-          <form className="container-content">
-            <input
-              data-testid="edit-input-image"
-              id="image"
-              value={ image }
-              onChange={ this.handleChange }
-            />
-            <br />
-            <br />
-            <label htmlFor="name">
-              Nome
+          <div className="container-content">
+            <div id="header-content">
+              <img src={ backHeader } alt="back-header" />
+            </div>
+          </div>
+          <div id="perfil-container">
+            <div id="perfil-image">
+              <img
+                src={ srcimg }
+                alt="perfil"
+                data-testid="profile-image"
+              />
+              <input
+                data-testid="edit-input-image"
+                id="image"
+                placeholder="Insira um Link"
+                value={ image }
+                onChange={ this.handleChange }
+              />
+            </div>
+            <form id="dados-container">
+              <br />
+              <p>Nome</p>
+              <p className="p-auxiliar">Fique à vontade para usar seu nome social</p>
               <input
                 data-testid="edit-input-name"
                 id="name"
+                placeholder="Nome"
                 value={ name }
                 onChange={ this.handleChange }
               />
-            </label>
-            <br />
-            <br />
-            <label htmlFor="email">
-              Email
+              <br />
+              <p>E-mail</p>
+              <p className="p-auxiliar">Escolha um email que consulte diariamente</p>
               <input
                 data-testid="edit-input-email"
                 id="email"
+                placeholder="usuario@dominio.com"
                 value={ email }
                 onChange={ this.valideEmail }
               />
-            </label>
-            <br />
-            <br />
-            <label htmlFor="description">
-              Descrição
+              <br />
+              <p>Descrição</p>
               <textarea
                 data-testid="edit-input-description"
                 id="description"
+                placeholder="Sobre mim"
                 value={ description }
                 onChange={ this.handleChange }
               />
-            </label>
-            <br />
-            <br />
-            <button
-              type="button"
-              data-testid="edit-button-save"
-              disabled={ !(name && email && description && image && statusEmail) }
-              onClick={ this.updateData }
-            >
-              Salvar
-            </button>
-          </form>
+              <br />
+              <br />
+              <button
+                type="button"
+                data-testid="edit-button-save"
+                disabled={ !(name && email && description && image && statusEmail) }
+                onClick={ this.updateData }
+              >
+                Salvar
+              </button>
+            </form>
+          </div>
         </div>
       </div>
     );
@@ -179,6 +200,7 @@ class ProfileEdit extends React.Component {
 
 ProfileEdit.propTypes = {
   compHeader: PropTypes.element.isRequired,
+  updateUserData: PropTypes.func.isRequired,
 };
 
 export default ProfileEdit;

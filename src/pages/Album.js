@@ -5,6 +5,7 @@ import Carregando from './Carregando';
 import MusicCard from '../components/MusicCard';
 import { addSong } from '../services/favoriteSongsAPI';
 import backHeader from '../imgStyle/back-header.png';
+import '../styleFav.css';
 
 class Album extends React.Component {
   constructor() {

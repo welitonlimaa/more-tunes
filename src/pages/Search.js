@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Carregando from './Carregando';
 import backHeader from '../imgStyle/back-header.png';
+import notFoundX from '../imgStyle/notFound.png';
 
 class Search extends React.Component {
   render() {
@@ -61,7 +62,11 @@ class Search extends React.Component {
         );
       });
     } else if (arrayArtist.length === 0 && clicouSearch === true) {
-      tituloNotfound = <p>Nenhum álbum foi encontrado</p>;
+      tituloNotfound = (
+        <div id="not-found-artista">
+          <img src={ notFoundX } alt="not found" />
+          <p>Nenhum álbum foi encontrado</p>
+        </div>);
     }
 
     return (

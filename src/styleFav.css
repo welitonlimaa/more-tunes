@@ -1,0 +1,71 @@
+.music-cards input {
+    display: none;
+}
+
+.music-cards input+label:before {
+    border-width: 2px;
+    border-top-style: solid;
+    border-left-style: solid;
+    border-right-style: solid;
+    background-color: white;
+}
+
+.music-cards input+label:after {
+    border-width: 2px;
+    border-top-style: solid;
+    border-right-style: solid;
+}
+
+
+.music-cards input+label:before,
+label:after {
+    position: absolute;
+    content: "";
+    margin-left: 10px;
+    margin-top: -2px;
+    width: 12px;
+    height: 20px;
+    background-color: white;
+    /*border-radius*/
+    -webkit-border-radius: 50px 50px 0 0;
+    -moz-border-radius: 50px 50px 0 0;
+    border-radius: 50px 50px 0 0;
+    /*transform*/
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    /*transform-origin*/
+    -webkit-transform-origin: 0 100%;
+    -moz-transform-origin: 0 100%;
+    -ms-transform-origin: 0 100%;
+    -o-transform-origin: 0 100%;
+    transform-origin: 0 100%;
+}
+
+.music-cards input+label:after {
+    margin-right: 0px;
+    margin-left: -2px;
+    background-color: white;
+    /*transform*/
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg);
+    /*transform-origin*/
+    -webkit-transform-origin: 100% 100%;
+    -moz-transform-origin: 100% 100%;
+    -ms-transform-origin: 100% 100%;
+    -o-transform-origin: 100% 100%;
+    transform-origin: 100% 100%;
+}
+
+.music-cards input:checked+label:before {
+    background-color: red;
+}
+
+.music-cards input:checked+label:after {
+    background-color: red;
+}

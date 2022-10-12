@@ -4,6 +4,7 @@ import Carregando from './Carregando';
 import MusicCard from '../components/MusicCard';
 import { getFavoriteSongs } from '../services/favoriteSongsAPI';
 import backHeader from '../imgStyle/back-header.png';
+import '../styleFav.css';
 
 class Favorites extends React.Component {
   constructor() {
@@ -42,9 +43,9 @@ class Favorites extends React.Component {
     const { musicas } = this.state;
 
     const { loadingRemove, add, listaFav, loadingFav } = this.props;
-    if (musicas === undefined || loadingRemove === true || loadingFav === true) {
-      return <Carregando />;
-    }
+    // if (musicas === undefined || loadingRemove === true || loadingFav === true) {
+    //   return <Carregando />;
+    // }
     const { compHeader } = this.props;
     return (
       <div data-testid="page-favorites">
@@ -55,31 +56,33 @@ class Favorites extends React.Component {
               <img src={ backHeader } alt="back-header" />
             </div>
           </div>
-          <div id="container-favorites">
-            <div>
-              <h3>Músicas Favoritas</h3>
-            </div>
-            <div id="fav-container">
-              {
-                musicas.map((dado, index) => {
-                  const { trackId, trackName, previewUrl, artworkUrl60 } = dado;
-                  return (
-                    <MusicCard
-                      key={ index }
-                      trackId={ trackId }
-                      trackName={ trackName }
-                      previewUrl={ previewUrl }
-                      artworkUrl60={ artworkUrl60 }
-                      musicas={ musicas }
-                      callInsertFav={ this.callUpdate }
-                      add={ add }
-                      listaFav={ listaFav }
-                    />
-                  );
-                })
-              }
-            </div>
-          </div>
+          { musicas === undefined || loadingRemove === true || loadingFav === true
+            ? <Carregando />
+            : (<div id="container-favorites">
+              <div>
+                <h3>Músicas Favoritas</h3>
+              </div>
+              <div id="fav-container">
+                {
+                  musicas.map((dado, index) => {
+                    const { trackId, trackName, previewUrl, artworkUrl60 } = dado;
+                    return (
+                      <MusicCard
+                        key={ index }
+                        trackId={ trackId }
+                        trackName={ trackName }
+                        previewUrl={ previewUrl }
+                        artworkUrl60={ artworkUrl60 }
+                        musicas={ musicas }
+                        callInsertFav={ this.callUpdate }
+                        add={ add }
+                        listaFav={ listaFav }
+                      />
+                    );
+                  })
+                }
+              </div>
+               </div>)}
         </div>
       </div>
     );
