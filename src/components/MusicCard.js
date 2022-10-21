@@ -13,7 +13,6 @@ class MusicCard extends React.Component {
     } else {
       add = false;
     }
-
     return (
       <div className="music-cards">
         <img src={ artworkUrl60 } alt={ trackName } />
@@ -25,11 +24,14 @@ class MusicCard extends React.Component {
           <input
             data-testid={ `checkbox-music-${trackId}` }
             id={ trackId }
+            className="inputc"
             type="checkbox"
             checked={ add }
             onChange={ () => callInsertFav(trackId, add) }
           />
-          <label htmlFor={ trackId } />
+          <label htmlFor={ trackId } className="inputc">
+            {' '}
+          </label>
         </div>
       </div>
     );

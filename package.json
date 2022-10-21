@@ -15,7 +15,10 @@
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4"
   },
+  "homepage": "https://welitonlimaa.github.io/more-tunes",
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -43,6 +46,7 @@
   },
   "devDependencies": {
     "eslint-config-trybe-frontend": "1.3.1",
+    "gh-pages": "^4.0.0",
     "prop-types": "^15.8.1",
     "stylelint": "^14.11.0",
     "stylelint-config-standard": "^28.0.0",

@@ -62,7 +62,7 @@ header {
   margin-bottom: 120px;
 }
 
-#nav :link div {
+#nav :link {
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -70,20 +70,20 @@ header {
   font-size: 20px;
 }
 
-#nav :nth-child(1) div {
+/* #nav :nth-child(1) {
   margin-top: 80px;
 }
 
-#nav :nth-child(2) div {
+#nav :nth-child(2) {
   margin-top: -80px;
 }
 
-#nav :nth-child(3) div {
+#nav :nth-child(3) {
   margin-top: -90px;
   margin-left: -55px;
-}
+} */
 
-#nav :visited {
+#nav :visited p {
   color: white;
 }
 
@@ -91,14 +91,15 @@ header {
   width: 25px;
 }
 
-#nav :nth-child(3) div img {
+#nav :nth-child(3) img {
   width: 28px;
   border-radius: 100%;
   border: 2px white solid;
+  margin-left: -30px;
 }
 
 #nav :nth-child(3) p {
-  margin-left: -65px;
+  margin-left: -70px;
 }
 
 #logo-header {

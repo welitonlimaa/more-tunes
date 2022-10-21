@@ -58,31 +58,33 @@ class Favorites extends React.Component {
           </div>
           { musicas === undefined || loadingRemove === true || loadingFav === true
             ? <Carregando />
-            : (<div id="container-favorites">
-              <div>
-                <h3>Músicas Favoritas</h3>
+            : (
+              <div id="container-favorites">
+                <div>
+                  <h3>Músicas Favoritas</h3>
+                </div>
+                <div id="fav-container">
+                  {
+                    musicas.map((dado, index) => {
+                      const { trackId, trackName, previewUrl, artworkUrl60 } = dado;
+                      return (
+                        <MusicCard
+                          key={ index }
+                          trackId={ trackId }
+                          trackName={ trackName }
+                          previewUrl={ previewUrl }
+                          artworkUrl60={ artworkUrl60 }
+                          musicas={ musicas }
+                          callInsertFav={ this.callUpdate }
+                          add={ add }
+                          listaFav={ listaFav }
+                        />
+                      );
+                    })
+                  }
+                </div>
               </div>
-              <div id="fav-container">
-                {
-                  musicas.map((dado, index) => {
-                    const { trackId, trackName, previewUrl, artworkUrl60 } = dado;
-                    return (
-                      <MusicCard
-                        key={ index }
-                        trackId={ trackId }
-                        trackName={ trackName }
-                        previewUrl={ previewUrl }
-                        artworkUrl60={ artworkUrl60 }
-                        musicas={ musicas }
-                        callInsertFav={ this.callUpdate }
-                        add={ add }
-                        listaFav={ listaFav }
-                      />
-                    );
-                  })
-                }
-              </div>
-               </div>)}
+            )}
         </div>
       </div>
     );

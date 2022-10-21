@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { getUser } from '../services/userAPI';
 import Carregando from './Carregando';
@@ -41,60 +41,63 @@ class Profile extends React.Component {
   };
 
   render() {
-    const { compHeader } = this.props;
+    // const { compHeader } = this.props;
     const { name, email, description, loadingUser } = this.state;
 
-    // if (loadingUser === true) {
-    //   return <Carregando />;
-    // }
     let { image } = this.state;
     if (image.length === 0) {
       image = perfilphoto;
     }
     const user = { name, image };
 
+    const buttonEditar = (
+      <button type="button">
+        Editar Perfil
+      </button>
+    );
+
     return (
       <div data-testid="page-profile">
         <Header user={ user } />
         { loadingUser === true ? <Carregando />
-          : (<div className="container">
-            <div className="container-content-perfil">
-              <div className="header-content-perfil">
-                <img src={ backHeader } alt="back-header" />
+          : (
+            <div className="container">
+              <div className="container-content-perfil">
+                <div className="header-content-perfil">
+                  <img src={ backHeader } alt="back-header" />
+                </div>
               </div>
-            </div>
-            <div id="perfil-container">
-              <div id="perfil-image">
-                <img
-                  src={ image }
-                  alt="perfil"
-                  data-testid="profile-image"
-                />
-              </div>
-              <div id="dados-container">
-                <div>
-                  <h3>Nome</h3>
-                  <p>{name}</p>
-                  <h3>E-mail</h3>
-                  <p>{email}</p>
-                  <h3>Descrição</h3>
-                  <p>{description}</p>
-                  <Link to="/profile/edit">
-                    <button type="button">
-                      Editar Perfil
-                    </button>
-                  </Link>
+              <div id="perfil-container">
+                <div id="perfil-image">
+                  <img
+                    src={ image }
+                    alt="perfil"
+                    data-testid="profile-image"
+                  />
+                </div>
+                <div id="dados-container">
+                  <div>
+                    <h3>Nome</h3>
+                    <p>{name}</p>
+                    <h3>E-mail</h3>
+                    <p>{email}</p>
+                    <h3>Descrição</h3>
+                    <p>{description}</p>
+                    <Link to="/profile/edit">
+                      {buttonEditar}
+                    </Link>
+                  </div>
                 </div>
               </div>
             </div>
-             </div>)}
+          )}
       </div>
     );
   }
 }
 
-Profile.propTypes = {
-  compHeader: PropTypes.element.isRequired,
-};
+// Profile.propTypes = {
+//   compHeader: PropTypes.element.isRequired,
+// };
 
 export default Profile;

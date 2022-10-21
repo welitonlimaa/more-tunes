@@ -57,16 +57,19 @@ class Album extends React.Component {
       componente = <Carregando />;
     } else {
       const { artistName, collectionName, artworkUrl100 } = album[0];
+      const albumtitle = (
+        <div id="album-title">
+          <h3 data-testid="album-name">{collectionName}</h3>
+          <h5 data-testid="artist-name">{artistName}</h5>
+        </div>
+      );
       componente = (
         <div id="album-id">
           <div id="album-image">
             <img src={ artworkUrl100 } alt={ collectionName } />
           </div>
           <div id="album-container">
-            <div id="album-title">
-              <h3 data-testid="album-name">{collectionName}</h3>
-              <h5 data-testid="artist-name">{artistName}</h5>
-            </div>
+            {albumtitle}
             <div id="album-musics">
               { album.map((dado, index) => {
                 const { trackId, trackName, previewUrl, artworkUrl60 } = dado;

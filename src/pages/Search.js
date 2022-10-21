@@ -17,24 +17,30 @@ class Search extends React.Component {
     if (artist.length >= limit) {
       isDisabled = false;
     }
+    const inputForm = (
+      <input
+        data-testid="search-artist-input"
+        placeholder="Nome do Artista ou Banda"
+        name="artist"
+        value={ artist }
+        onChange={ onInputChange }
+      />
+    );
 
+    const buttonPesquisar = (
+      <button
+        type="button"
+        data-testid="search-artist-button"
+        disabled={ isDisabled }
+        onClick={ searchArtist }
+      >
+        Pesquisar
+      </button>
+    );
     const componente = (
       <form>
-        <input
-          data-testid="search-artist-input"
-          placeholder="Nome do Artista ou Banda"
-          name="artist"
-          value={ artist }
-          onChange={ onInputChange }
-        />
-        <button
-          type="button"
-          data-testid="search-artist-button"
-          disabled={ isDisabled }
-          onClick={ searchArtist }
-        >
-          Pesquisar
-        </button>
+        {inputForm}
+        {buttonPesquisar}
       </form>
     );
 
@@ -42,7 +48,11 @@ class Search extends React.Component {
     let tituloArtista = '';
     let albums = '';
     if (arrayArtist.length > 0 && clicouSearch === true) {
-      tituloArtista = <h3 id="titulo-artista">{`Resultado de álbuns de: ${nameArtista}`}</h3>;
+      tituloArtista = (
+        <h3 id="titulo-artista">
+          {`Resultado de álbuns de: ${nameArtista}`}
+        </h3>
+      );
       albums = arrayArtist.map((dado, id) => {
         const { artistName, collectionId, collectionName, artworkUrl100 } = dado;
         //  collectionPrice, releaseDate, trackCount, artistId,

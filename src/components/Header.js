@@ -21,22 +21,16 @@ class Header extends React.Component {
           <img src={ logo } alt="logo" id="logo-header" />
           <div id="nav">
             <Link to="/search" data-testid="link-to-search">
-              <div>
-                <img src={ pesquisa } alt="pesquisa" />
-                <p>Pesquisa</p>
-              </div>
+              <img src={ pesquisa } alt="pesquisa" />
+              <p>Pesquisa</p>
             </Link>
             <Link to="/favorites" data-testid="link-to-favorites">
-              <div>
-                <img src={ favoritas } alt="favoritas" />
-                <p>Favoritas</p>
-              </div>
+              <img src={ favoritas } alt="favoritas" />
+              <p>Favoritas</p>
             </Link>
             <Link to="/profile" data-testid="link-to-profile">
-              <div>
-                <img src={ perfilphoto } alt="perfil" />
-                <p>Perfil</p>
-              </div>
+              <img src={ perfilphoto } alt="perfil" />
+              <p>Perfil</p>
             </Link>
           </div>
           <div id="user-header">
