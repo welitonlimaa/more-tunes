@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/more-tunes/static/css/main.5da0ae99.css",
-    "main.js": "/more-tunes/static/js/main.4a7c5f40.js",
+    "main.js": "/more-tunes/static/js/main.58d460b6.js",
     "static/media/musica.gif": "/more-tunes/static/media/musica.385cf78f68bb03deed00.gif",
     "static/media/back.png": "/more-tunes/static/media/back.0c19678483982c6a78f0.png",
     "static/media/back-header.png": "/more-tunes/static/media/back-header.bda904869346dbf68cc6.png",
     "static/media/perfilphoto.png": "/more-tunes/static/media/perfilphoto.9d39f8d4d15f019fe767.png",
     "index.html": "/more-tunes/index.html",
     "main.5da0ae99.css.map": "/more-tunes/static/css/main.5da0ae99.css.map",
-    "main.4a7c5f40.js.map": "/more-tunes/static/js/main.4a7c5f40.js.map"
+    "main.58d460b6.js.map": "/more-tunes/static/js/main.58d460b6.js.map"
   },
   "entrypoints": [
     "static/css/main.5da0ae99.css",
-    "static/js/main.4a7c5f40.js"
+    "static/js/main.58d460b6.js"
   ]
 }
