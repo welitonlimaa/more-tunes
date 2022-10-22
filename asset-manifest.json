@@ -1,17 +1,18 @@
 {
   "files": {
-    "main.css": "/more-tunes/static/css/main.5da0ae99.css",
-    "main.js": "/more-tunes/static/js/main.58d460b6.js",
+    "main.css": "/more-tunes/static/css/main.68ac18c7.css",
+    "main.js": "/more-tunes/static/js/main.ccdb2bf3.js",
     "static/media/musica.gif": "/more-tunes/static/media/musica.385cf78f68bb03deed00.gif",
     "static/media/back.png": "/more-tunes/static/media/back.0c19678483982c6a78f0.png",
+    "static/media/backphone.jpg": "/more-tunes/static/media/backphone.143232211ff89f080288.jpg",
     "static/media/back-header.png": "/more-tunes/static/media/back-header.bda904869346dbf68cc6.png",
     "static/media/perfilphoto.png": "/more-tunes/static/media/perfilphoto.9d39f8d4d15f019fe767.png",
     "index.html": "/more-tunes/index.html",
-    "main.5da0ae99.css.map": "/more-tunes/static/css/main.5da0ae99.css.map",
-    "main.58d460b6.js.map": "/more-tunes/static/js/main.58d460b6.js.map"
+    "main.68ac18c7.css.map": "/more-tunes/static/css/main.68ac18c7.css.map",
+    "main.ccdb2bf3.js.map": "/more-tunes/static/js/main.ccdb2bf3.js.map"
   },
   "entrypoints": [
-    "static/css/main.5da0ae99.css",
-    "static/js/main.58d460b6.js"
+    "static/css/main.68ac18c7.css",
+    "static/js/main.ccdb2bf3.js"
   ]
 }
