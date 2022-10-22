@@ -11,9 +11,7 @@ class Login extends React.Component {
         <img src={ back } alt="back" id="imgBack" />
         <form>
           <div id="logo-Form">
-            <div id="logo">
-              <img src={ logo } alt="logo" />
-            </div>
+            <img src={ logo } alt="logo" />
             <div id="loginForm">
               <input
                 data-testid="login-name-input"
