@@ -10,6 +10,7 @@ import ProfileEdit from './pages/ProfileEdit';
 import NotFound from './pages/NotFound';
 import Carregando from './pages/Carregando';
 import Header from './components/Header';
+import Nav from './components/Nav';
 import { getFavoriteSongs, removeSong } from './services/favoriteSongsAPI';
 
 class Routes extends React.Component {
@@ -170,6 +171,9 @@ class Routes extends React.Component {
         />
         <Route path="/profile">
           <Profile compHeader={ compHeader } />
+        </Route>
+        <Route path="/nav">
+          <Nav user={ dados } />
         </Route>
         <Route path="*" component={ NotFound } />
       </Switch>

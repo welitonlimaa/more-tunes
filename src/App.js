@@ -3,6 +3,7 @@ import Routes from './Routes';
 import { createUser, getUser } from './services/userAPI';
 import searchAlbumsAPI from './services/searchAlbumsAPI';
 import './index.css';
+import './stylephone.css';
 
 class App extends React.Component {
   constructor() {
