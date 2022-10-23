@@ -94,21 +94,6 @@ class ProfileEdit extends React.Component {
     const { name, email, description, isLoadingUser, salvo, image } = this.state;
     let { statusEmail } = this.state;
 
-    // const arrayUser = [name, email, description, image];
-    // const statusArray = Array(0).fill(0);
-    // for (let i = 0; i < arrayUser.length; i += 1) {
-    //   if (arrayUser[i].length !== 0) {
-    //     statusArray[i] = true;
-    //   } else {
-    //     statusArray[i] = false;
-    //   }
-    // }
-
-    // const status = statusArray.some((dado) => dado === false);
-    // if (status !== true && statusEmail === true) {
-    //   isDisabled = false;
-    // }
-
     if (isLoadingUser === true && salvo === false) {
       return <Carregando />;
     }
@@ -144,6 +129,7 @@ class ProfileEdit extends React.Component {
               />
               <input
                 data-testid="edit-input-image"
+                type="text"
                 id="image"
                 placeholder="Insira um Link"
                 value={ image }
@@ -156,6 +142,7 @@ class ProfileEdit extends React.Component {
               <p className="p-auxiliar">Fique à vontade para usar seu nome social</p>
               <input
                 data-testid="edit-input-name"
+                type="text"
                 id="name"
                 placeholder="Nome"
                 value={ name }
@@ -166,6 +153,7 @@ class ProfileEdit extends React.Component {
               <p className="p-auxiliar">Escolha um email que consulte diariamente</p>
               <input
                 data-testid="edit-input-email"
+                type="email"
                 id="email"
                 placeholder="usuario@dominio.com"
                 value={ email }

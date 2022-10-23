@@ -313,10 +313,10 @@ code {
     flex-wrap: wrap;
     bottom: 15%;
     width: 90%;
-    margin-left: 100px;
+    margin-left: 200px;
   }
 
-  #album-image> :nth-child(1) {
+  #album-image {
     width: 220px;
   }
 
@@ -326,7 +326,7 @@ code {
 
   #album-title {
     margin-top: 30px;
-    color: white;
+    color: rgb(32, 34, 37);
   }
 
   #album-musics {

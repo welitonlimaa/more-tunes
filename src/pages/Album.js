@@ -65,10 +65,8 @@ class Album extends React.Component {
       );
       componente = (
         <div id="album-id">
-          <div id="album-image">
-            <img src={ artworkUrl100 } alt={ collectionName } />
-          </div>
           <div id="album-container">
+            <img src={ artworkUrl100 } alt={ collectionName } id="album-image" />
             {albumtitle}
             <div id="album-musics">
               { album.map((dado, index) => {

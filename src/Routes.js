@@ -113,7 +113,6 @@ class Routes extends React.Component {
     if (clicou === true) {
       componente = <Carregando />;
     }
-    console.log(user);
 
     return (
       <Switch>
