@@ -1,6 +1,6 @@
 Link de acesso à aplicação: https://welitonlimaa.github.io/more-tunes
 <details>
-  <summary><strong>👨 Como funciona o More Tunes/strong></summary><br />
+  <summary><strong>👨 Como funciona o More Tunes </strong></summary><br />
 
   More Tunes é uma aplicação capaz de reproduzir músicas das mais variadas bandas e artistas, criar uma lista de músicas favoritas e editar o perfil da pessoa usuária logada. Essa aplicação será capaz de:
 
@@ -13,6 +13,8 @@ Link de acesso à aplicação: https://welitonlimaa.github.io/more-tunes
   - Ver a lista de músicas favoritas;
   - Ver o perfil da pessoa logada;
   - Editar o perfil da pessoa logada;
+  
+  ![ezgif com-gif-maker (1)](https://user-images.githubusercontent.com/108986668/208488169-c8f0448b-d27d-4cc4-87c2-33db7540b464.gif)
 
 </details>
 <details>
