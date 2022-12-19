@@ -30,5 +30,16 @@ Link de acesso à aplicação: https://welitonlimaa.github.io/more-tunes
 
 - Criação links de navegação na aplicação com o componente `Link`;
 </details>
-
 <details>
+  <summary><strong>‼️ Acessando Localmente</strong></summary><br />
+
+  1. Clone o repositório
+
+  - Use o comando: `git clone`.
+  - Entre na pasta do repositório que você acabou de clonar
+
+  2. Instale as dependências
+
+  - `npm install`.
+
+</details>
