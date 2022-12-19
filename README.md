@@ -15,3 +15,20 @@ Link de acesso à aplicação: https://welitonlimaa.github.io/more-tunes
   - Editar o perfil da pessoa logada;
 
 </details>
+<details>
+  <summary><strong>:memo: Habilidades Envolvidas </strong></summary><br />
+
+- Requisições e consumo de dados vindos de uma `API`;
+
+- Ciclos de vida de um componente React;
+
+- Utilização da função `setState` de forma a garantir que um determinado código só é executado após o estado ser atualizado
+
+- Utilização do componente `BrowserRouter` para criar rotas, mapeando o caminho da URL com o componente correspondente, via `Route`;
+
+- Utilização o `Switch` do `React Router`
+
+- Criação links de navegação na aplicação com o componente `Link`;
+</details>
+
+<details>
