@@ -1,4 +1,3 @@
-Link de acesso à aplicação: https://welitonlimaa.github.io/more-tunes
 <details>
   <summary><strong>👨 Como funciona o More Tunes </strong></summary><br />
 
