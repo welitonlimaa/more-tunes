@@ -10,7 +10,7 @@ class App extends React.Component {
     super();
     this.state = {
       name: '',
-      isDisabled: true,
+      // isDisabled: true,
       isLoading: true,
       loadingUser: true,
       loadingArtist: false,
@@ -80,12 +80,12 @@ class App extends React.Component {
   render() {
     const { name, isLoading, clicou, user, loadingUser, artist,
       arrayArtist, loadingArtist, clicouSearch, nameArtista } = this.state;
-    let { isDisabled, logado } = this.state;
-    const limit = 3;
+    let { logado } = this.state;
+    // const limit = 3;
 
-    if (name.length >= limit) {
-      isDisabled = false;
-    }
+    // if (name.length >= limit) {
+    //   isDisabled = false;
+    // }
 
     if (isLoading === false) {
       logado = true;
